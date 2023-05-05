@@ -1,0 +1,65 @@
+/*----- constants -----*/
+
+
+/*----- state variables -----*/
+-variable named board to track the state of the board
+
+
+/*----- cached elements  -----*/
+Intro Page:
+-In a constant labeled introTxt, store the element that displays the games instructions on the intro page
+-Add a 'Begin' button to the HTML 
+-Store the begin button element in a constant named 'beginBtn'
+
+Board:
+-In a constant labeled beginBtn, 
+-In a container labeled 'cards', store the twelve elements representing the cards on the board
+-In a constant labeled messageEl, store the element that displays the game status on the top of the page ("Winner!" or "Time's Up! You Lose") 
+
+Reset Functionality:
+-add a 'Play Again' button to the html
+-store the play again button element in a constant name 'playAgainBtn'
+
+/*----- event listeners -----*/
+-Attach and event listener to the 'beginBtn' on the intro page that listens for a 'click' event and calls the init functions
+
+-Attach and event listener to the board that will listen for a click on a chosen card and either a. stores card ones information or b. compare card one to card two
+
+-Attach and event listener to the 'playAgainBtn' on the game board that listens for a 'click' event and calls the init function
+
+
+/*----- functions -----*/
+
+
+
+
+
+Instructions page
+-List instructions of the game
+-'Begin' button 
+-Once begin button is clicked, switch frame 
+
+Timer 
+-determine amount of time alloted 
+-start countdown when begin button is clicked on instructions page
+-once time is up, clear bored and display "Time's Up! You Lose." message 
+-restart when play again button is pressed
+
+Play Again Button 
+-only appear when the game is finished
+-when clicked, reset board and start timer again
+
+Board 
+-3 cards by 4 cards
+-cards turn over when clicked 
+-if second card clicked does not match first, both cards flip back over
+-if second card clicked matches first, both cards dissapear from the board
+-6 possible matches
+
+Winner
+-once all cards have disappeared, timer pauses
+-display "Winner!" message
+-Play again button appears
+
+
+

@@ -1,26 +1,35 @@
 /*----- constants -----*/
-
+-array of possibe matches stores in array of all card values
 
 /*----- state variables -----*/
 -variable named board to track the state of the board
 
 
 /*----- cached elements  -----*/
+
 Intro Page:
 -In a constant labeled introTxt, store the element that displays the games instructions on the intro page
+
 -Add a 'Begin' button to the HTML 
+
 -Store the begin button element in a constant named 'beginBtn'
 
 Board:
+
 -In a constant labeled beginBtn, 
+
 -In a container labeled 'cards', store the twelve elements representing the cards on the board
+
 -In a constant labeled messageEl, store the element that displays the game status on the top of the page ("Winner!" or "Time's Up! You Lose") 
 
 Reset Functionality:
+
 -add a 'Play Again' button to the html
+
 -store the play again button element in a constant name 'playAgainBtn'
 
 /*----- event listeners -----*/
+
 -Attach and event listener to the 'beginBtn' on the intro page that listens for a 'click' event and calls the init functions
 
 -Attach and event listener to the board that will listen for a click on a chosen card and either a. stores card ones information or b. compare card one to card two
@@ -30,36 +39,71 @@ Reset Functionality:
 
 /*----- functions -----*/
 
+Instructions Page:
 
+-Upon loading, page will feature 'introTxt' and the 'beginBtn'
 
+-beginBtn event listener will listen for 'click', then call 'init' function and render the game board
 
+Board:
 
-Instructions page
--List instructions of the game
--'Begin' button 
--Once begin button is clicked, switch frame 
+-'init' function will render board 
 
-Timer 
--determine amount of time alloted 
--start countdown when begin button is clicked on instructions page
--once time is up, clear bored and display "Time's Up! You Lose." message 
--restart when play again button is pressed
+  - Set the 'board' variable to an array with twelve cards, 6 pairs
 
-Play Again Button 
--only appear when the game is finished
--when clicked, reset board and start timer again
+  - Call 'randomizeCards' function to randomize order of card setup
 
-Board 
--3 cards by 4 cards
--cards turn over when clicked 
--if second card clicked does not match first, both cards flip back over
--if second card clicked matches first, both cards dissapear from the board
--6 possible matches
+  - Call a function called 'setTimer' to read 1:00 (one minute) and begin countdown
 
-Winner
--once all cards have disappeared, timer pauses
--display "Winner!" message
--Play again button appears
+  - Call a function called 'render' to render the game board
+
+-'render' function will
+
+  - Call renderBoard function that will loop over each element in the board array and
+
+      -Remove match pairs that have been clicked
+
+      -Flip cards back to blank if not paired
+
+      =Show card when clicked
+
+  - Call renderMessage function that calls 'Winner' if board is empty
+
+  - Display my 'playAgainBtn' if winner is declared or time has run out
+
+-'cardClick' function will 
+
+  -Store the variable of the first card click
+
+  -Store the variable of the second card clicked
+
+  -Call function 'checkForMatch' to compare the two chosen variables
+
+    -Return determines if cards will disappear from board or turn back over
+
+    -Passes variables to 'render' function
+
+  -checkForWinner function will
+
+    -Check that all pairs have been matched, if return is true then call declareWinner function
+
+    -declareWinner function will
+
+      - Stop running timer once all matches have been selected/cleared
+
+      - Render 'playAgainBtn'
+
+      - Render messageEl to say "You Win!"
+  
+Timer:
+
+-Set to 1:00 by 'init' function
+
+-Function to clear board once timer expires
+
+  -Render messageEl to read "Time's up! You Lose"
+  
+  -Render 'playAgainBtn'
 
 
 

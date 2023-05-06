@@ -1,6 +1,18 @@
-header {
-  font: black;
-}
+
+
 body {
-  background: purple;
+  background: rgba(91, 42, 16, 0.876);
+  font:#ffc5e4;
+}
+
+header {
+  color:#ffc5e4;
+}
+
+h1 {
+  color:#ffc5e4;
+}
+
+h2 {
+  color:#ffc5e4;
 }

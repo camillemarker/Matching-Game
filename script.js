@@ -12,5 +12,7 @@ const messageEl = document.querySelector('h1')
 const cards = document.querySelectorAll('.card')
 const cardsContainer = document.querySelector('#cards')
 /*----- event listeners -----*/
-
+beginBtn.addEventListener('click', init)
+playAgainBtn.addEventListener('click', init)
+card.addEventListener('click', cardClick)
 /*----- functions -----*/

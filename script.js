@@ -3,6 +3,7 @@
 /*----- state variables -----*/
 let board //3 rows, 4 columns
 let winner
+let matches = 0
 //const cardClass = ['boot', 'hat', 'pistol', 'horse', 'horseshoe', 'lasso'] //possible back of card images
 //const imgPairs = [...cardImgs, ...cardImgs] //combo of any two clicked cards
 
@@ -70,21 +71,39 @@ function cardClick(event) {
   console.log(clickNum)
   if (clickNum === 1) {
     clickNum = 2
-    firstClick = element.getAttribute('imgClass')
-    console.log(firstClick)
+    firstClick = element
+    console.log(firstClick.getAttribute('imgClass'))
   } else {
     clickNum = 1
-    secondClick = element.getAttribute('imgClass')
-    console.log(firstClick, secondClick)
-    findMatch()
+    secondClick = element
+    console.log(
+      firstClick.getAttribute('imgClass'),
+      secondClick.getAttribute('imgClass')
+    )
+    if (findMatch() === true) {
+      firstClick.removeEventListener('click', cardClick)
+      secondClick.removeEventListener('click', cardClick)
+    }
   }
 }
 
 function findMatch() {
-  if (firstClick === secondClick) {
+  if (
+    firstClick.getAttribute('imgClass') === secondClick.getAttribute('imgClass')
+  ) {
     console.log('its a match!')
+    matches++
+    console.log('matches; ', matches)
+    if (matches >= 6) {
+      declareWinner()
+    }
+    return true
   } else {
     firstClick = ''
     secondClick = ''
   }
+}
+
+function declareWinner() {
+  console.log('WINNNN')
 }

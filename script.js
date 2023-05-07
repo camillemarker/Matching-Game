@@ -3,8 +3,8 @@
 /*----- state variables -----*/
 let board //3 rows, 4 columns
 let winner
-const cardImgs = [a, b, c, d, e, f] //possible back of card images
-const imgPairs = [...cardImgs, ...cardImgs] //combo of any two clicked cards
+//const cardImgs = [a, b, c, d, e, f] //possible back of card images
+//const imgPairs = [...cardImgs, ...cardImgs] //combo of any two clicked cards
 
 /*----- cached elements  -----*/
 const beginBtn = document.querySelector('#beginBtn')
@@ -14,37 +14,51 @@ const cards = document.querySelectorAll('.card')
 const cardsContainer = document.querySelector('#cards')
 
 /*----- event listeners -----*/
-beginBtn.addEventListener('click', init)
-playAgainBtn.addEventListener('click', init)
-card.addEventListener('click', cardClick)
+//beginBtn.addEventListener('click', init)
+//playAgainBtn.addEventListener('click', init)
+//card.addEventListener('click', cardClick)
 
 /*----- functions -----*/
 
 function init() {
-  board = {
-    [0, 0, 0] //colArr 0
-    [0, 0, 0] //colArr 1
-    [0, 0, 0] //colArr 2
+  board = [
+    [0, 0, 0], //colArr 0
+    [0, 0, 0], //colArr 1
+    [0, 0, 0], //colArr 2
     [0, 0, 0] //colArr 3
-  }
-  winner = null
+  ]
+  //winner = null
+  //setTimer()
+  //randomizeCards()
   render()
 }
+init()
 
 function render() {
-  renderMessage()
+  //renderMessage()
   renderControls()
-  playAgainBtn.style.visibilty = 'hidden'
+  //playAgainBtn.style.visibilty = 'hidden'
 }
 
 function renderMessage() {
-  if(winner) {
-    messageEl.innerHTML = "Yippee-Ki-Yay! You Win"
+  if (winner) {
+    messageEl.innerHTML = 'Yippee-Ki-Yay! You Win'
     playAgainBtn.style.visibility = 'visible'
-  }else if(loser) {
-    messageEl.innerHTML = "Better Luck Next Time, Buckaroo! You Lose"
+  } else if (loser) {
+    messageEl.innerHTML = 'Better Luck Next Time, Buckaroo! You Lose'
     playAgainBtn.style.visibility = 'visible'
-  }else{
-    messageEl.innerHTML = ""
+  } else {
+    messageEl.innerHTML = "Giddy-Up and Get Matchin'!"
   }
+}
+
+function renderControls() {
+  cards.forEach((card) => {
+    card.addEventListener('click', cardClick)
+  })
+}
+function cardClick(event) {
+  const element = event.target
+  const [column, row] = element.getAttribute('id').split('-')
+  console.log([column, row])
 }

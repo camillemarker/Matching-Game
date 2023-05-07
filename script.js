@@ -57,6 +57,7 @@ function renderControls() {
     card.addEventListener('click', cardClick)
   })
 }
+
 function cardClick(event) {
   const element = event.target
   const [column, row] = element.getAttribute('id').split('-')

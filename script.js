@@ -4,8 +4,6 @@
 let board //3 rows, 4 columns
 let winner
 let matches = 0
-//const cardClass = ['boot', 'hat', 'pistol', 'horse', 'horseshoe', 'lasso'] //possible back of card images
-//const imgPairs = [...cardImgs, ...cardImgs] //combo of any two clicked cards
 
 /*----- cached elements  -----*/
 const beginBtn = document.querySelector('#beginBtn')
@@ -69,6 +67,7 @@ let secondClick
 function cardClick(event) {
   const element = event.target
   console.log(clickNum)
+  element.classList.toggle('flip')
   if (clickNum === 1) {
     clickNum = 2
     firstClick = element

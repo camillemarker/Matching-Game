@@ -16,6 +16,7 @@ body {
   column-gap: 100px;
   row-gap: 60px;
   border: none;
+  perspective: 1000px;
 }
 
 .card {
@@ -25,6 +26,13 @@ body {
   display: grid;
   justify-content: center;
   align-items: center;
+  place-items: center;
+  transform-style: preserve-3d;
+  transition: transform .5s
+  }
+
+.card:hover {
+  transform: scale(1.03);
   }
 
 header {
@@ -33,4 +41,13 @@ header {
   text-align: center;
   font-size: 50px;
   margin-top: 5px
+}
+
+.card img {
+width: 80%;
+max-height: 90px;
+}
+
+.card.flip {
+  transform: rotateY(180deg)
 }

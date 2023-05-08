@@ -51,3 +51,17 @@ max-height: 90px;
 .card.flip {
   transform: rotateY(180deg)
 }
+
+button {
+  background-color: #ffc5e4;
+  color:rgb(239, 24, 128);
+  border:5px solid rgb(239, 24, 128);
+  align-content: center;
+  visibility : hidden;
+  margin-top : 5px
+}
+
+button:hover {
+  background-color: rgb(239, 24, 128);
+  color: #ffc5e4
+}

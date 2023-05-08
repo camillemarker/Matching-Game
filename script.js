@@ -7,17 +7,18 @@ let matches = 0
 
 /*----- cached elements  -----*/
 const beginBtn = document.querySelector('#beginBtn')
-const playAgainBtn = document.querySelector('#playAgainBtn')
+const playAgainBtn = document.querySelector('.playAgainBtn')
 const messageEl = document.querySelector('h1')
 const cards = document.querySelectorAll('.card')
 const cardsContainer = document.querySelector('#cards')
 
 /*----- event listeners -----*/
 //beginBtn.addEventListener('click', init)
-//playAgainBtn.addEventListener('click', init)
+playAgainBtn.addEventListener('click', init)
 //card.addEventListener('click', cardClick)
 
 /*----- functions -----*/
+init()
 
 function init() {
   board = [
@@ -26,25 +27,22 @@ function init() {
     [0, 0, 0], //colArr 2
     [0, 0, 0] //colArr 3
   ]
-  //winner = null
+  winner = false
   //setTimer()
   //randomizeCards()
   render()
 }
-init()
 
 function render() {
-  //renderMessage()
+  console.log('rendering')
+  playAgainBtn.style.visibility = 'hidden'
+  renderMessage()
   renderControls()
-  //playAgainBtn.style.visibilty = 'hidden'
 }
 
 function renderMessage() {
   if (winner) {
     messageEl.innerHTML = 'Yippee-Ki-Yay! You Win'
-    playAgainBtn.style.visibility = 'visible'
-  } else if (loser) {
-    messageEl.innerHTML = 'Better Luck Next Time, Buckaroo! You Lose'
     playAgainBtn.style.visibility = 'visible'
   } else {
     messageEl.innerHTML = "Giddy-Up and Get Matchin'!"
@@ -93,7 +91,7 @@ function findMatch() {
     console.log('its a match!')
     matches++
     console.log('matches; ', matches)
-    if (matches >= 6) {
+    if (matches >= 1) {
       declareWinner()
     }
     return true
@@ -105,4 +103,6 @@ function findMatch() {
 
 function declareWinner() {
   console.log('WINNNN')
+  winner = true
+  renderMessage()
 }

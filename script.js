@@ -11,6 +11,7 @@ const playAgainBtn = document.querySelector('.playAgainBtn')
 const messageEl = document.querySelector('h1')
 const cards = document.querySelectorAll('.card')
 const cardsContainer = document.querySelector('#cards')
+const timer = document.getElementById('#timer')
 
 /*----- event listeners -----*/
 //beginBtn.addEventListener('click', init)
@@ -28,7 +29,7 @@ function init() {
     [0, 0, 0] //colArr 3
   ]
   winner = false
-  //setTimer()
+  matches = 0
   //randomizeCards()
   render()
 }
@@ -54,6 +55,28 @@ function renderControls() {
     card.addEventListener('click', cardClick)
   })
 }
+
+//timer
+// Set the date we're counting down to
+const setOneMinuteTime = new Date()
+setOneMinuteTime.setTime(Date.now() + 1 * 60 * 1000) // Add 1 minutes to current timestamp
+let countDownDate = new Date(setOneMinuteTime).getTime()
+//set interval for the actual countdown
+let x = setInterval(function () {
+  let now = new Date().getTime()
+  //end time minus the current time
+  let distance = countDownDate - now
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000)
+  //show countdown  in div demo
+  document.getElementById('timer').innerHTML = minutes + 'm ' + seconds + 's '
+  if (distance < 0) {
+    clearInterval(x)
+    document.getElementById('timer').style.visibility = 'hidden'
+    messageEl.innerHTML = 'Slow as Molasses in January! You lose '
+    playAgainBtn.style.visibility = 'visible'
+  }
+}, 1000)
 
 //Establishing a match
 const cardClassName = ['boot', 'hat', 'pistol', 'horse', 'horseshoe', 'lasso']
@@ -106,3 +129,8 @@ function declareWinner() {
   winner = true
   renderMessage()
 }
+
+/* else if ((timer = expired)) {
+    messageEl.innerHTML = 'Slow as Mplasses in January! You lose '
+    playAgainBtn.style.visibility = 'visible'
+    card.removeEventListener('click', cardClick)*/

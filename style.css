@@ -1,6 +1,6 @@
 
 body {
-  background-color: #ffc5e4;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,8 +20,8 @@ body {
 }
 
 .card {
-  background-color: #ffc5e4;
-  border: 12px solid  rgb(255, 255, 255);
+  background-color: rgb(144, 238, 255);
+  border: 12px solid rgb(255, 255, 255) ;
   border-radius: 10px;
   display: grid;
   justify-content: center;
@@ -41,7 +41,6 @@ header {
   font-size: 40px;
   margin-top: 5px;
   font-family: 'Rye', cursive;
-  font-family: 'Satisfy', cursive;
   
 }
 

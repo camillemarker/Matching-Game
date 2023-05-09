@@ -91,7 +91,7 @@ function findMatch() {
     console.log('its a match!')
     matches++
     console.log('matches; ', matches)
-    if (matches >= 1) {
+    if (matches >= 6) {
       declareWinner()
     }
     return true

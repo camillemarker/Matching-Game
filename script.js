@@ -3,7 +3,11 @@
 /*----- state variables -----*/
 let board //3 rows, 4 columns
 let winner
-let matches = 0
+let matches
+let clickNum = 1 //number of clicks
+let wrong = false
+let firstClick
+let secondClick
 
 /*----- cached elements  -----*/
 const beginBtn = document.querySelector('#beginBtn')
@@ -16,27 +20,21 @@ const timer = document.getElementById('#timer')
 /*----- event listeners -----*/
 //beginBtn.addEventListener('click', init)
 playAgainBtn.addEventListener('click', init)
-//card.addEventListener('click', cardClick)
+//cards.addEventListener('click', cardClick)
 
 /*----- functions -----*/
 init()
 
 function init() {
-  board = [
-    [0, 0, 0], //colArr 0
-    [0, 0, 0], //colArr 1
-    [0, 0, 0], //colArr 2
-    [0, 0, 0] //colArr 3
-  ]
   winner = false
   matches = 0
+  playAgainBtn.style.visibility = 'hidden'
   //randomizeCards()
   render()
 }
 
 function render() {
   console.log('rendering')
-  playAgainBtn.style.visibility = 'hidden'
   renderMessage()
   renderControls()
 }
@@ -58,7 +56,7 @@ function renderControls() {
 
 //timer
 // Set the date we're counting down to
-const setOneMinuteTime = new Date()
+/*const setOneMinuteTime = new Date()
 setOneMinuteTime.setTime(Date.now() + 1 * 60 * 1000) // Add 1 minutes to current timestamp
 let countDownDate = new Date(setOneMinuteTime).getTime()
 //set interval for the actual countdown
@@ -72,55 +70,55 @@ let x = setInterval(function () {
   document.getElementById('timer').innerHTML = minutes + 'm ' + seconds + 's '
   if (distance < 0) {
     clearInterval(x)
-    document.getElementById('timer').style.visibility = 'hidden'
     messageEl.innerHTML = 'Slow as Molasses in January! You lose '
+    timer.remove()
     playAgainBtn.style.visibility = 'visible'
+    console.log('TIMERRR')
   }
-}, 1000)
+}, 1000) */
 
 //Establishing a match
-const cardClassName = ['boot', 'hat', 'pistol', 'horse', 'horseshoe', 'lasso']
-let clickNum = 1 //number of clicks
-let wrong = false
-let firstClick
-let secondClick
-
+let el1
+let el2
 function cardClick(event) {
   const element = event.target
   console.log(clickNum)
   element.classList.toggle('flip')
   if (clickNum === 1) {
     clickNum = 2
-    firstClick = element
-    console.log(firstClick.getAttribute('imgClass'))
+    el1 = element
+    firstClick = element.getAttribute('imgClass')
+    console.log(firstClick)
   } else {
     clickNum = 1
-    secondClick = element
-    console.log(
-      firstClick.getAttribute('imgClass'),
-      secondClick.getAttribute('imgClass')
-    )
+    el2 = element
+    secondClick = element.getAttribute('imgClass')
+    console.log(firstClick, secondClick)
     if (findMatch() === true) {
-      firstClick.removeEventListener('click', cardClick)
-      secondClick.removeEventListener('click', cardClick)
+      el1.removeEventListener('click', cardClick)
+      el2.removeEventListener('click', cardClick)
     }
   }
 }
 
 function findMatch() {
-  if (
-    firstClick.getAttribute('imgClass') === secondClick.getAttribute('imgClass')
-  ) {
+  if (firstClick === secondClick) {
     console.log('its a match!')
     matches++
     console.log('matches; ', matches)
     if (matches >= 6) {
       declareWinner()
     }
+    firstClick = ''
+    secondClick = ''
     return true
   } else {
     firstClick = ''
     secondClick = ''
+    setTimeout(() => {
+      el1.classList.toggle('flip'), el2.classList.toggle('flip') //make cards pause before flipping back over
+    }, 1200)
+    return false
   }
 }
 
@@ -129,8 +127,3 @@ function declareWinner() {
   winner = true
   renderMessage()
 }
-
-/* else if ((timer = expired)) {
-    messageEl.innerHTML = 'Slow as Mplasses in January! You lose '
-    playAgainBtn.style.visibility = 'visible'
-    card.removeEventListener('click', cardClick)*/

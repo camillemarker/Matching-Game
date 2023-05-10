@@ -19,7 +19,7 @@ const timer = document.getElementById('#timer')
 
 /*----- event listeners -----*/
 //beginBtn.addEventListener('click', init)
-playAgainBtn.addEventListener('click', init)
+//playAgainBtn.addEventListener('click', init)
 //cards.addEventListener('click', cardClick)
 
 /*----- functions -----*/
@@ -43,6 +43,7 @@ function renderMessage() {
   if (winner) {
     messageEl.innerHTML = 'Yippee-Ki-Yay! You Win'
     playAgainBtn.style.visibility = 'visible'
+    playAgainBtn.addEventListener('click', playAgain)
   } else {
     messageEl.innerHTML = "Giddy-Up and Get Matchin'!"
   }
@@ -52,6 +53,13 @@ function renderControls() {
   cards.forEach((card) => {
     card.addEventListener('click', cardClick)
   })
+}
+
+function playAgain() {
+  cards.forEach((card) => {
+    card.classList.toggle('flip')
+  })
+  init()
 }
 
 //timer
@@ -71,15 +79,15 @@ let x = setInterval(function () {
   if (distance < 0) {
     clearInterval(x)
     messageEl.innerHTML = 'Slow as Molasses in January! You lose '
-    timer.remove()
     playAgainBtn.style.visibility = 'visible'
+    playAgainBtn.addEventListener('click', playAgain)
     console.log('TIMERRR')
   }
-}, 1000) */
+}, 1000)*/
 
 //Establishing a match
-let el1
-let el2
+let el1 //first clicked card
+let el2 //second clicked card
 function cardClick(event) {
   const element = event.target
   console.log(clickNum)
@@ -87,22 +95,28 @@ function cardClick(event) {
   if (clickNum === 1) {
     clickNum = 2
     el1 = element
+    el1.removeEventListener('click', cardClick)
     firstClick = element.getAttribute('imgClass')
     console.log(firstClick)
   } else {
     clickNum = 1
     el2 = element
+    el2.removeEventListener('click', cardClick)
     secondClick = element.getAttribute('imgClass')
     console.log(firstClick, secondClick)
-    if (findMatch() === true) {
-      el1.removeEventListener('click', cardClick)
-      el2.removeEventListener('click', cardClick)
+    if (findMatch() === false) {
+      el1.addEventListener('click', cardClick)
+      el2.addEventListener('click', cardClick)
     }
   }
 }
 
 function findMatch() {
-  if (firstClick === secondClick) {
+  if (
+    firstClick === secondClick &&
+    firstClick !== null &&
+    secondClick !== null
+  ) {
     console.log('its a match!')
     matches++
     console.log('matches; ', matches)
@@ -116,8 +130,9 @@ function findMatch() {
     firstClick = ''
     secondClick = ''
     setTimeout(() => {
-      el1.classList.toggle('flip'), el2.classList.toggle('flip') //make cards pause before flipping back over
-    }, 1200)
+      //make cards pause before flipping back over
+      el1.classList.toggle('flip'), el2.classList.toggle('flip')
+    }, 600)
     return false
   }
 }
@@ -127,3 +142,14 @@ function declareWinner() {
   winner = true
   renderMessage()
 }
+
+/*function fisher_yates() {
+  let array = ['boot', 'hat', 'horse', 'lasso', 'chameleon', 'horseshoe']
+  let i = array.length
+  while (--i > 0) {
+    let temp = Math.floor(Math.random() * (i + 1))
+    ;[array[temp], array[i]] = [array[i], array[temp]]
+  }
+  document.getElementsByClassName('imgClass').innerHTML = array
+  console.log('fisheryates')
+}*/

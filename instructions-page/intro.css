@@ -2,34 +2,43 @@
 
 body {
   background: #ffc5e4;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  margin: 0 auto;
+  gap: 0px;
 
 }
 
+#intro {
+  text-align: center;
+  color: rgb(239, 24, 128);
+}
+
+#imgs1, #imgs2 {
+place-self: center;
+
+} 
+
 header {
-  color:rgb(239, 24, 128);
   font-size: 80px;
   font-family: 'Rye', cursive;
   
 }
 
 h1 {
-  color:rgb(239, 24, 128);
   font-size: 40px;
   font-family: 'Rye', cursive;
   font-family: 'Satisfy', cursive;
-  
 }
 
 h2 {
-  color: rgb(239, 24, 128);
-  background: #ffc5e4;
   font-size: 30px;
   padding: 15px;
   margin: 5px 300px 25px 300px;
   line-height: 60px;
   font-family: 'Rye', cursive;
   font-family: 'Satisfy', cursive;
+
 }
 
 button {
@@ -38,10 +47,9 @@ button {
   background-color: #ffc5e4;
   color:rgb(239, 24, 128);
   border:5px solid rgb(239, 24, 128);
-  align-content: center;
   margin-top : 5px;
   width: 150px;
-  height: 50px
+  height: 50px;
 }
 
 button:hover {

@@ -11,17 +11,24 @@ body {
   color: rgb(239, 24, 128);
 }
 
-#imgs1,
-#imgs2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 header {
   font-size: 80px;
   font-family: 'Rye', cursive;
+}
+
+.instructions {
+  font-size: 40px;
+  font-family: 'Satisfy', cursive;
+  margin: 0px;
+}
+
+.description {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 30px;
+  padding: 15px;
+  line-height: 60px;
+  font-family: 'Satisfy', cursive;
 }
 
 button {
@@ -40,6 +47,14 @@ button:hover {
   color: #ffc5e4;
 }
 
+#imgs1,
+#imgs2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .star {
   width: 200px;
   height: 200px;
@@ -50,23 +65,4 @@ button:hover {
   width: 200px;
   height: 200px;
   margin: 24px 0px;
-}
-
-.title {
-  font-family: 'Rye', cursive;
-}
-
-.instructions {
-  font-size: 40px;
-  font-family: 'Satisfy', cursive;
-  margin: 0px;
-}
-
-.description {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  font-size: 30px;
-  padding: 15px;
-  line-height: 60px;
-  font-family: 'Satisfy', cursive;
 }

@@ -20,9 +20,10 @@ let winner
 let matches
 let clickNum = 1 //number of clicks
 let wrong = false
+let seconds
 let firstClick
 let secondClick
-
+let timer
 /*----- cached elements  -----*/
 // const beginBtn = document.querySelector('#beginBtn')
 // const playAgainBtn = document.querySelector('.playAgainBtn')
@@ -41,6 +42,9 @@ init()
 
 function init() {
   winner = false
+  seconds = 60
+  timer = setInterval(countDown, 1000)
+  timerExpired = false
   matches = 0
   const playAgainBtn = document.querySelector('.playAgainBtn')
   playAgainBtn.style.visibility = 'hidden'
@@ -55,12 +59,19 @@ function render() {
 }
 
 function renderMessage() {
+  const cards = document.querySelectorAll('.card')
   const messageEl = document.querySelector('h1')
+  const playAgainBtn = document.querySelector('.playAgainBtn')
+  playAgainBtn.addEventListener('click', playAgain)
   if (winner) {
     messageEl.innerHTML = 'Yippee-Ki-Yay! You Win'
-    const playAgainBtn = document.querySelector('.playAgainBtn')
     playAgainBtn.style.visibility = 'visible'
-    playAgainBtn.addEventListener('click', playAgain)
+  } else if (timerExpired) {
+    messageEl.innerHTML = 'Slower than Molasses in January! You Lose!'
+    playAgainBtn.style.visibility = 'visible'
+    cards.forEach((card) => {
+      card.removeEventListener('click', cardClick)
+    })
   } else {
     messageEl.innerHTML = "Giddy-Up and Get Matchin'!"
   }
@@ -76,7 +87,8 @@ function renderControls() {
 function playAgain() {
   const cards = document.querySelectorAll('.card')
   cards.forEach((card) => {
-    card.classList.toggle('flip')
+    //card.classList.toggle('flip')
+    card.remove() //gets rid of the last array of cards
   })
   init()
 }
@@ -133,13 +145,15 @@ function findMatch() {
   }
 }
 
-function declareWinner() {
+const declareWinner = () => {
   console.log('WINNNN')
   winner = true
+  clearInterval(timer)
   renderMessage()
 }
 
 function randomizeCards(cards = []) {
+  //Fisher Yates (see sources)
   let i = cards.length
   while (--i > 0) {
     let temp = Math.floor(Math.random() * (i + 1))
@@ -158,11 +172,14 @@ function randomizeCards(cards = []) {
     divElement.appendChild(imgElement)
     document.querySelector('#cards').appendChild(divElement)
   })
+}
 
-  // Create a div -> add 'card' class
-  // Create the img element
-  // Add src
-  // Add alt
-  // append img element to div
-  // append div to element with id of 'cards'
+function countDown() {
+  seconds--
+  if (seconds === 0) {
+    clearInterval(timer)
+    timerExpired = true
+    renderMessage()
+  }
+  document.getElementById('timer').textContent = seconds + ' seconds'
 }

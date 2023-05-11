@@ -1,4 +1,18 @@
 /*----- constants -----*/
+const cardsArray = [
+  { src: 'images/boot.png', alt: 'Boot', cardType: 'boot' },
+  { src: 'images/boot.png', alt: 'Boot', cardType: 'boot' },
+  { src: 'images/pink-cowgirl-hat.png', alt: 'Hat', cardType: 'hat' },
+  { src: 'images/pink-cowgirl-hat.png', alt: 'Hat', cardType: 'hat' },
+  { src: 'images/horse.png', alt: 'Horse', cardType: 'horse' },
+  { src: 'images/horse.png', alt: 'Horse', cardType: 'horse' },
+  { src: 'images/lasso.png', alt: 'Lasso', cardType: 'lasso' },
+  { src: 'images/lasso.png', alt: 'Lasso', cardType: 'lasso' },
+  { src: 'images/pink-chameleon.png', alt: 'Chameleon', cardType: 'chameleon' },
+  { src: 'images/pink-chameleon.png', alt: 'Chameleon', cardType: 'chameleon' },
+  { src: 'images/horseshoe.png', alt: 'Horseshoe', cardType: 'horseshoe' },
+  { src: 'images/horseshoe.png', alt: 'Horseshoe', cardType: 'horseshoe' }
+]
 
 /*----- state variables -----*/
 let board //3 rows, 4 columns
@@ -10,12 +24,12 @@ let firstClick
 let secondClick
 
 /*----- cached elements  -----*/
-const beginBtn = document.querySelector('#beginBtn')
-const playAgainBtn = document.querySelector('.playAgainBtn')
-const messageEl = document.querySelector('h1')
-const cards = document.querySelectorAll('.card')
-const cardsContainer = document.querySelector('#cards')
-const timer = document.getElementById('#timer')
+// const beginBtn = document.querySelector('#beginBtn')
+// const playAgainBtn = document.querySelector('.playAgainBtn')
+// const messageEl = document.querySelector('h1')
+// const cards = document.querySelectorAll('.card')
+// const cardsContainer = document.querySelector('#cards')
+// const timer = document.getElementById('#timer')
 
 /*----- event listeners -----*/
 //beginBtn.addEventListener('click', init)
@@ -28,8 +42,9 @@ init()
 function init() {
   winner = false
   matches = 0
+  const playAgainBtn = document.querySelector('.playAgainBtn')
   playAgainBtn.style.visibility = 'hidden'
-  //randomizeCards()
+  randomizeCards(cardsArray)
   render()
 }
 
@@ -40,8 +55,10 @@ function render() {
 }
 
 function renderMessage() {
+  const messageEl = document.querySelector('h1')
   if (winner) {
     messageEl.innerHTML = 'Yippee-Ki-Yay! You Win'
+    const playAgainBtn = document.querySelector('.playAgainBtn')
     playAgainBtn.style.visibility = 'visible'
     playAgainBtn.addEventListener('click', playAgain)
   } else {
@@ -50,40 +67,19 @@ function renderMessage() {
 }
 
 function renderControls() {
+  const cards = document.querySelectorAll('.card')
   cards.forEach((card) => {
     card.addEventListener('click', cardClick)
   })
 }
 
 function playAgain() {
+  const cards = document.querySelectorAll('.card')
   cards.forEach((card) => {
     card.classList.toggle('flip')
   })
   init()
 }
-
-//timer
-// Set the date we're counting down to
-/*const setOneMinuteTime = new Date()
-setOneMinuteTime.setTime(Date.now() + 1 * 60 * 1000) // Add 1 minutes to current timestamp
-let countDownDate = new Date(setOneMinuteTime).getTime()
-//set interval for the actual countdown
-let x = setInterval(function () {
-  let now = new Date().getTime()
-  //end time minus the current time
-  let distance = countDownDate - now
-  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-  let seconds = Math.floor((distance % (1000 * 60)) / 1000)
-  //show countdown  in div demo
-  document.getElementById('timer').innerHTML = minutes + 'm ' + seconds + 's '
-  if (distance < 0) {
-    clearInterval(x)
-    messageEl.innerHTML = 'Slow as Molasses in January! You lose '
-    playAgainBtn.style.visibility = 'visible'
-    playAgainBtn.addEventListener('click', playAgain)
-    console.log('TIMERRR')
-  }
-}, 1000)*/
 
 //Establishing a match
 let el1 //first clicked card
@@ -143,13 +139,30 @@ function declareWinner() {
   renderMessage()
 }
 
-/*function fisher_yates() {
-  let array = ['boot', 'hat', 'horse', 'lasso', 'chameleon', 'horseshoe']
-  let i = array.length
+function randomizeCards(cards = []) {
+  let i = cards.length
   while (--i > 0) {
     let temp = Math.floor(Math.random() * (i + 1))
-    ;[array[temp], array[i]] = [array[i], array[temp]]
+    ;[cards[temp], cards[i]] = [cards[i], cards[temp]]
   }
-  document.getElementsByClassName('imgClass').innerHTML = array
-  console.log('fisheryates')
-}*/
+
+  cards.forEach((card) => {
+    const divElement = document.createElement('div')
+    divElement.className = 'card'
+    divElement.setAttribute('imgClass', card.cardType)
+    const imgElement = document.createElement('img')
+    imgElement.className = 'front'
+    imgElement.src = card.src
+    imgElement.alt = card.alt
+
+    divElement.appendChild(imgElement)
+    document.querySelector('#cards').appendChild(divElement)
+  })
+
+  // Create a div -> add 'card' class
+  // Create the img element
+  // Add src
+  // Add alt
+  // append img element to div
+  // append div to element with id of 'cards'
+}

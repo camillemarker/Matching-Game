@@ -1,6 +1,4 @@
-
 body {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +19,7 @@ body {
 
 .card {
   background-color: rgb(144, 238, 255);
-  border: 12px solid rgb(255, 255, 255) ;
+  border: 12px solid rgb(255, 255, 255);
   border-radius: 10px;
   display: grid;
   justify-content: center;
@@ -29,15 +27,15 @@ body {
   place-items: center;
   transform: scale(1);
   transform-style: preserve-3d;
-  transition: transform .5s;
-  }
+  transition: transform 0.5s;
+}
 
 .card:hover {
   transform: scale(1.03);
-  }
-  
+}
+
 .card:active {
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 .front {
@@ -50,16 +48,15 @@ body {
 }
 
 .front {
-  transform: rotateY(180deg)
+  transform: rotateY(180deg);
 }
 
 header {
-  color:rgb(239, 24, 128);
+  color: rgb(239, 24, 128);
   text-align: center;
   font-size: 40px;
   margin-top: 5px;
   font-family: 'Rye', cursive;
-  
 }
 
 .card img {
@@ -68,36 +65,35 @@ header {
 }
 
 .card.flip {
-  transform: rotateY(180deg)
-} 
+  transform: rotateY(180deg);
+}
 
 button {
   display: inline;
   padding: 0px;
   background-color: #ffc5e4;
-  color:rgb(239, 24, 128);
-  border:5px solid rgb(239, 24, 128);
-  visibility : hidden;
+  color: rgb(239, 24, 128);
+  border: 5px solid rgb(239, 24, 128);
+  visibility: hidden;
   font-family: 'Rye', cursive;
 }
 
 button:hover {
   background-color: rgb(239, 24, 128);
-  color: #ffc5e4
+  color: #ffc5e4;
 }
 
 h1 {
-  color:rgb(239, 24, 128);
+  color: rgb(239, 24, 128);
   font-family: 'Rye', cursive;
   font-family: 'Satisfy', cursive;
   font-size: 30px;
 }
 
 #timer {
-
   border: 5px solid rgb(239, 24, 128);
 
-  display:inline;
+  display: inline;
 
   padding: 0px;
 
@@ -110,5 +106,4 @@ h1 {
   font-weight: bold;
 
   text-decoration: none;
-
 }

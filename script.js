@@ -20,9 +20,10 @@ let winner
 let matches
 let clickNum = 1 //number of clicks
 let wrong = false
+let seconds
 let firstClick
 let secondClick
-
+let timer
 /*----- cached elements  -----*/
 // const beginBtn = document.querySelector('#beginBtn')
 // const playAgainBtn = document.querySelector('.playAgainBtn')
@@ -41,7 +42,9 @@ init()
 
 function init() {
   winner = false
-  //timerExpired = false
+  seconds = 60
+  timer = setInterval(countDown, 1000)
+  timerExpired = false
   matches = 0
   const playAgainBtn = document.querySelector('.playAgainBtn')
   playAgainBtn.style.visibility = 'hidden'
@@ -56,15 +59,19 @@ function render() {
 }
 
 function renderMessage() {
+  const cards = document.querySelectorAll('.card')
   const messageEl = document.querySelector('h1')
   const playAgainBtn = document.querySelector('.playAgainBtn')
   playAgainBtn.addEventListener('click', playAgain)
   if (winner) {
     messageEl.innerHTML = 'Yippee-Ki-Yay! You Win'
     playAgainBtn.style.visibility = 'visible'
-    //} else if (timerExpired) {
-    // messageEl.innerHTML = 'Slower than Molasses in January! You Lose!'
-    //  playAgainBtn.style.visibility = 'visible'
+  } else if (timerExpired) {
+    messageEl.innerHTML = 'Slower than Molasses in January! You Lose!'
+    playAgainBtn.style.visibility = 'visible'
+    cards.forEach((card) => {
+      card.removeEventListener('click', cardClick)
+    })
   } else {
     messageEl.innerHTML = "Giddy-Up and Get Matchin'!"
   }
@@ -141,6 +148,7 @@ function findMatch() {
 const declareWinner = () => {
   console.log('WINNNN')
   winner = true
+  clearInterval(timer)
   renderMessage()
 }
 
@@ -166,14 +174,12 @@ function randomizeCards(cards = []) {
   })
 }
 
-// let seconds = 60
-// let timer = setInterval(countDown, 1000)
-// function countDown() {
-//   seconds--
-//   if ((seconds = 0)) {
-//     clearInterval(timer)
-//     timerExpired = true
-//     renderMessage()
-//   }
-//   document.getElementById('timer').textContent = seconds + 'seconds'
-// }
+function countDown() {
+  seconds--
+  if (seconds === 0) {
+    clearInterval(timer)
+    timerExpired = true
+    renderMessage()
+  }
+  document.getElementById('timer').textContent = seconds + ' seconds'
+}

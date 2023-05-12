@@ -12,9 +12,9 @@
 
 This is a card-matching memory game that I made using the vanilla Javascript tools which I learned in my first two weeks of coding bootcamp. After an instructions page, the player will be redirected to a gameboard (card grid) with a timer. Timer will begin count down immediately upon clicking 'Begin Game' button on the previous instructions page. Player will be able to select cards within a grid of cards to turn them over, revealing an image on the back of the card. Player will then select a second card to try and find the cards match. If a match is found, the selected cards will remain image-side up and no longer have click functionality. If a match is not found, selected cards will flip back over. Player will have 40 seconds to find all matching pairs in the grid before a timer runs out and declares a loss. If all six pairs are matched before time is out, the clock will stop and winner will be declared. A play again button will then appear under the timer to restart the timer and shuffle the deck.
 
-## ![Instructions Page](https://imgur.com/a/kHPZrNv)
+![Instructions Page](https://i.imgur.com/2SlxSrB.png)
 
-## ![Game Page](https://imgur.com/a/mutTXPC)
+![Game Page](https://i.imgur.com/CWKHtr7.png)
 
 ---
 
@@ -41,7 +41,7 @@ This is a card-matching memory game that I made using the vanilla Javascript too
 
 #### **_Future Updates_**
 
-- [] Mobile Functionality
+- [ ] Mobile Functionality
 
 #### **_Credits_**
 

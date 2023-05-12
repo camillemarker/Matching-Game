@@ -19,10 +19,11 @@ let board //3 rows, 4 columns
 let winner
 let matches
 let clickNum = 1 //number of clicks
-let wrong = false
 let seconds
 let firstClick
 let secondClick
+let el1 //first clicked card
+let el2 //second clicked card
 let timer
 /*----- cached elements  -----*/
 // const beginBtn = document.querySelector('#beginBtn')
@@ -42,10 +43,10 @@ init()
 
 function init() {
   winner = false
-  seconds = 60
-  timer = setInterval(countDown, 1000)
   timerExpired = false
   matches = 0
+  seconds = 60
+  timer = setInterval(countDown, 1000)
   const playAgainBtn = document.querySelector('.playAgainBtn')
   playAgainBtn.style.visibility = 'hidden'
   randomizeCards(cardsArray)
@@ -53,7 +54,6 @@ function init() {
 }
 
 function render() {
-  console.log('rendering')
   renderMessage()
   renderControls()
 }
@@ -87,66 +87,47 @@ function renderControls() {
 function playAgain() {
   const cards = document.querySelectorAll('.card')
   cards.forEach((card) => {
-    //card.classList.toggle('flip')
     card.remove() //gets rid of the last array of cards
   })
   init()
 }
 
-//Establishing a match
-let el1 //first clicked card
-let el2 //second clicked card
 function cardClick(event) {
   const element = event.target
-  console.log(clickNum)
   element.classList.toggle('flip')
   if (clickNum === 1) {
     clickNum = 2
     el1 = element
     el1.removeEventListener('click', cardClick)
     firstClick = element.getAttribute('imgClass')
-    console.log(firstClick)
   } else {
     clickNum = 1
     el2 = element
     el2.removeEventListener('click', cardClick)
     secondClick = element.getAttribute('imgClass')
-    console.log(firstClick, secondClick)
-    if (findMatch() === false) {
-      el1.addEventListener('click', cardClick)
-      el2.addEventListener('click', cardClick)
-    }
+    findMatch()
   }
 }
 
 function findMatch() {
-  if (
-    firstClick === secondClick &&
-    firstClick !== null &&
-    secondClick !== null
-  ) {
-    console.log('its a match!')
+  if (firstClick === secondClick) {
     matches++
-    console.log('matches; ', matches)
     if (matches >= 6) {
       declareWinner()
     }
-    firstClick = ''
-    secondClick = ''
-    return true
   } else {
-    firstClick = ''
-    secondClick = ''
     setTimeout(() => {
       //make cards pause before flipping back over
       el1.classList.toggle('flip'), el2.classList.toggle('flip')
     }, 600)
-    return false
+    el1.addEventListener('click', cardClick)
+    el2.addEventListener('click', cardClick)
   }
+  firstClick = ''
+  secondClick = ''
 }
 
-const declareWinner = () => {
-  console.log('WINNNN')
+function declareWinner() {
   winner = true
   clearInterval(timer)
   renderMessage()

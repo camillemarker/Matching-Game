@@ -86,7 +86,7 @@ const playAgain = () => {
 const findMatch = () => {
   if (firstClick === secondClick) {
     matches++
-    if (matches >= 6) {
+    if ((matches = 6)) {
       declareWinner()
     }
   } else {

@@ -10,7 +10,11 @@
 
 #### **_Description_**
 
-This is a card-matching memory game that I made using the vanilla Javascript tools which I learned in my first two weeks of coding bootcamp. After an instructions page, players will be redirected to a gameboard (card grid) with a timer. Timer will begin count down immediately upon clicking 'Begin Game' button on the previous instructions page. Players will be able to select cards within a grid of cards to turn them over, revealing an image on the back of the card. Players will then try to find the cards match. Players will have 1 minute to find all matching pairs in the grid before a timer runs out and declares a win/lose depending on whether or not all pairs have been matched. Player will then have the option to click a play again button and shuffle the deck/restart the timer.
+This is a card-matching memory game that I made using the vanilla Javascript tools which I learned in my first two weeks of coding bootcamp. After an instructions page, the player will be redirected to a gameboard (card grid) with a timer. Timer will begin count down immediately upon clicking 'Begin Game' button on the previous instructions page. Player will be able to select cards within a grid of cards to turn them over, revealing an image on the back of the card. Player will then select a second card to try and find the cards match. If a match is found, the selected cards will remain image-side up and no longer have click functionality. If a match is not found, selected cards will flip back over. Player will have 40 seconds to find all matching pairs in the grid before a timer runs out and declares a loss. If all six pairs are matched before time is out, the clock will stop and winner will be declared. A play again button will then appear under the timer to restart the timer and shuffle the deck.
+
+## ![Instructions Page](https://imgur.com/a/kHPZrNv)
+
+## ![Game Page](https://imgur.com/a/mutTXPC)
 
 ---
 
@@ -31,9 +35,13 @@ This is a card-matching memory game that I made using the vanilla Javascript too
 - A wireframe was made to map out the gameboard setup:
   ![Wireframe](https://i.imgur.com/GZopn8j.png)
 
-- The project itself was deployed and can be viewed [here]().
+- The project itself was deployed and can be viewed [here](https://camillesmemorymatch.surge.sh/).
 
 ---
+
+#### **_Future Updates_**
+
+- [] Mobile Functionality
 
 #### **_Credits_**
 
@@ -65,6 +73,7 @@ This is a card-matching memory game that I made using the vanilla Javascript too
 #### Code Sources:
 
 - [TutorialsPoint Fisher-Yates Shuffle](https://www.tutorialspoint.com/what-is-fisher-yates-shuffle-in-javascript)
+- [Flip Card Effect](https://jefferson-cuartas.medium.com/how-to-create-a-flip-card-effect-using-javascript-767dd945210c)
 - [A Complete Guide to CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
 - [W3 Window setTimeout Method](https://www.w3schools.com/jsref/met_win_settimeout.asp)
 - [W3 Window setInterval Method](https://www.w3schools.com/jsref/met_win_settimeout.asp)

@@ -1,4 +1,5 @@
 /*----- constants -----*/
+
 const cardsArray = [
   { src: 'images/boot.png', alt: 'Boot', cardType: 'boot' },
   { src: 'images/boot.png', alt: 'Boot', cardType: 'boot' },
@@ -15,6 +16,7 @@ const cardsArray = [
 ]
 
 /*----- state variables -----*/
+
 let board //3 rows, 4 columns
 let winner
 let matches
@@ -25,43 +27,32 @@ let secondClick
 let el1 //first clicked card
 let el2 //second clicked card
 let timer
-/*----- cached elements  -----*/
-// const beginBtn = document.querySelector('#beginBtn')
-// const playAgainBtn = document.querySelector('.playAgainBtn')
-// const messageEl = document.querySelector('h1')
-// const cards = document.querySelectorAll('.card')
-// const cardsContainer = document.querySelector('#cards')
-// const timer = document.getElementById('#timer')
 
-/*----- event listeners -----*/
-//beginBtn.addEventListener('click', init)
-//playAgainBtn.addEventListener('click', init)
-//cards.addEventListener('click', cardClick)
+/*----- cached elements  -----*/
+
+const playAgainBtn = document.querySelector('.playAgainBtn')
+const messageEl = document.querySelector('h1')
 
 /*----- functions -----*/
-init()
 
-function init() {
+const render = () => {
+  renderMessage()
+  renderControls()
+}
+
+const init = () => {
   winner = false
   timerExpired = false
   matches = 0
-  seconds = 60
+  seconds = 40
   timer = setInterval(countDown, 1000)
-  const playAgainBtn = document.querySelector('.playAgainBtn')
   playAgainBtn.style.visibility = 'hidden'
   randomizeCards(cardsArray)
   render()
 }
 
-function render() {
-  renderMessage()
-  renderControls()
-}
-
-function renderMessage() {
+const renderMessage = () => {
   const cards = document.querySelectorAll('.card')
-  const messageEl = document.querySelector('h1')
-  const playAgainBtn = document.querySelector('.playAgainBtn')
   playAgainBtn.addEventListener('click', playAgain)
   if (winner) {
     messageEl.innerHTML = 'Yippee-Ki-Yay! You Win'
@@ -77,14 +68,14 @@ function renderMessage() {
   }
 }
 
-function renderControls() {
+const renderControls = () => {
   const cards = document.querySelectorAll('.card')
   cards.forEach((card) => {
     card.addEventListener('click', cardClick)
   })
 }
 
-function playAgain() {
+const playAgain = () => {
   const cards = document.querySelectorAll('.card')
   cards.forEach((card) => {
     card.remove() //gets rid of the last array of cards
@@ -92,24 +83,7 @@ function playAgain() {
   init()
 }
 
-function cardClick(event) {
-  const element = event.target
-  element.classList.toggle('flip')
-  if (clickNum === 1) {
-    clickNum = 2
-    el1 = element
-    el1.removeEventListener('click', cardClick)
-    firstClick = element.getAttribute('imgClass')
-  } else {
-    clickNum = 1
-    el2 = element
-    el2.removeEventListener('click', cardClick)
-    secondClick = element.getAttribute('imgClass')
-    findMatch()
-  }
-}
-
-function findMatch() {
+const findMatch = () => {
   if (firstClick === secondClick) {
     matches++
     if (matches >= 6) {
@@ -127,13 +101,30 @@ function findMatch() {
   secondClick = ''
 }
 
-function declareWinner() {
+const cardClick = (event) => {
+  const element = event.target
+  element.classList.toggle('flip')
+  if (clickNum === 1) {
+    clickNum = 2
+    el1 = element
+    el1.removeEventListener('click', cardClick)
+    firstClick = element.getAttribute('imgClass')
+  } else {
+    clickNum = 1
+    el2 = element
+    el2.removeEventListener('click', cardClick)
+    secondClick = element.getAttribute('imgClass')
+    findMatch()
+  }
+}
+
+const declareWinner = () => {
   winner = true
   clearInterval(timer)
   renderMessage()
 }
 
-function randomizeCards(cards = []) {
+const randomizeCards = (cards = []) => {
   //Fisher Yates (see sources)
   let i = cards.length
   while (--i > 0) {
@@ -155,7 +146,7 @@ function randomizeCards(cards = []) {
   })
 }
 
-function countDown() {
+const countDown = () => {
   seconds--
   if (seconds === 0) {
     clearInterval(timer)
@@ -164,3 +155,5 @@ function countDown() {
   }
   document.getElementById('timer').textContent = seconds + ' seconds'
 }
+
+init()
